@@ -1,0 +1,793 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HS4.10 Convener Calendar</title>
+<meta name="description" content="Checklist and calendar of EGU27 convener tasks for session HS4.10.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231D5C8A'/%3E%3Cpath d='M4 20c4-6 7 2 11-3s6-8 13-6' stroke='%23fff' stroke-width='2.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: one column. Header, season strip (task windows over an ensemble plume), summary, then checklist or month grid. */
+:root{
+  --bg:#F0F3F5; --surface:#FFFFFF; --sunk:#E5EBEF; --ink:#0F2230; --muted:#55677A; --line:#D3DCE3;
+  --accent:#1D5C8A; --accent-ink:#FFFFFF; --accent-soft:#DCE9F3; --plume:#2F7FAF;
+  --deadline:#B23F28; --deadline-soft:#F8E3DD; --open:#0B7566; --open-soft:#D6EEE9;
+  --done:#3A7A48; --done-soft:#DFEEE2; --opt:#6D5E96; --opt-soft:#EAE5F5;
+  --f-display:"IBM Plex Sans Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"Cascadia Mono",Consolas,monospace;
+  --r:10px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0B151E; --surface:#12202B; --sunk:#0E1A24; --ink:#E2EAF0; --muted:#97A9B8; --line:#24384A;
+    --accent:#7AB6E2; --accent-ink:#07121B; --accent-soft:#17324A; --plume:#6FB3E0;
+    --deadline:#F08C6E; --deadline-soft:#3A1F19; --open:#4CC5B0; --open-soft:#103029;
+    --done:#7DC58E; --done-soft:#15301C; --opt:#B6A7DD; --opt-soft:#28223C;
+    color-scheme:dark;
+  }
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 var(--f-body)}
+a{color:var(--accent);text-underline-offset:2px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+[hidden]{display:none!important}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:32px 72px;display:grid;gap:22px}
+
+/* header */
+.eyebrow{margin:0;font:500 12px/1.4 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+h1{margin:6px 0 0;font:700 clamp(30px,5.2vw,46px)/1.05 var(--f-display);letter-spacing:-.01em;text-wrap:balance}
+h1 .code{color:var(--accent)}
+.lede{margin:10px 0 0;max-width:68ch;color:var(--muted);font-size:15.5px;text-wrap:pretty}
+.team{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.team li{display:flex;align-items:center;gap:8px;padding:4px 12px 4px 4px;border:1px solid var(--line);border-radius:999px;background:var(--surface);font-size:13.5px}
+.team .ini{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font:600 11px var(--f-mono)}
+.team .role{color:var(--muted);font-size:12px}
+
+/* season strip */
+.horizon{position:relative;height:158px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.hz-in{position:absolute;top:0;bottom:0;left:14px;right:14px}
+.hz-in canvas{position:absolute;inset:0;width:100%;height:100%}
+.band{position:absolute;height:8px;border-radius:4px;background:var(--accent-soft);border:1px solid var(--accent)}
+.band.lane0{top:24px}.band.lane1{top:54px}
+.band.ga{background:var(--accent)}
+.band span{position:absolute;left:0;bottom:9px;line-height:14px;font:600 11.5px var(--f-display);letter-spacing:.02em;color:var(--accent);white-space:nowrap}
+.band .short{display:none}
+.tick{position:absolute;top:0;bottom:24px;width:9px;margin-left:-4px}
+.tick::before{content:"";position:absolute;left:4px;top:0;bottom:0;border-left:1.5px dashed var(--deadline)}
+.tick::after{content:"";position:absolute;left:1px;bottom:-4px;width:7px;height:7px;background:var(--deadline);transform:rotate(45deg)}
+.now{position:absolute;top:0;bottom:24px;border-left:2px solid var(--ink)}
+.now b{position:absolute;left:4px;bottom:3px;padding:0 4px;background:var(--surface);font:600 10.5px var(--f-mono);letter-spacing:.06em;text-transform:uppercase}
+.axis{position:absolute;left:-14px;right:-14px;bottom:0;height:24px;border-top:1px solid var(--line)}
+.axis span{position:absolute;top:0;height:24px;padding:4px 0 0 5px;border-left:1px solid var(--line);font:500 11px var(--f-mono);color:var(--muted);white-space:nowrap}
+.legend{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12.5px;color:var(--muted)}
+.legend li{display:flex;align-items:center;gap:7px}
+.legend i{display:inline-block}
+.lg-band{width:18px;height:10px;border-radius:3px;background:var(--accent-soft);border:1px solid var(--accent)}
+.lg-dl{width:7px;height:7px;background:var(--deadline);transform:rotate(45deg)}
+.lg-now{width:2px;height:14px;background:var(--ink)}
+.lg-plume{width:22px;height:10px;background:linear-gradient(to right,var(--ink) 0 35%,transparent 35%),repeating-linear-gradient(-12deg,var(--plume) 0 1px,transparent 1px 4px);opacity:.8}
+
+/* summary */
+.summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;display:grid;gap:4px;align-content:start;min-width:0}
+.stat .lab{font:500 11.5px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.stat .big{font:700 30px/1.1 var(--f-display);font-variant-numeric:tabular-nums}
+.stat .big small{font:500 14px var(--f-body);color:var(--muted);margin-left:4px}
+.stat .what{font-weight:600;line-height:1.35}
+.stat .sub{font-size:13px;color:var(--muted)}
+.bar{height:6px;border-radius:3px;background:var(--sunk);overflow:hidden;margin-top:4px}
+.bar i{display:block;height:100%;background:var(--done);border-radius:3px}
+
+/* subscribe band */
+.subscribe{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:10px 24px;align-items:center;padding:16px 18px;border:1px dashed var(--accent);border-radius:var(--r);background:var(--accent-soft)}
+.subscribe h2{margin:0;font:600 18px/1.25 var(--f-display)}
+.subscribe p{margin:4px 0 0;font-size:13.5px;color:var(--muted)}
+.sub-row{display:flex;gap:8px;min-width:0}
+.sub-row input{flex:1;min-width:0;font:13px var(--f-mono);padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink)}
+.sub-links{margin:8px 0 0!important;display:flex;flex-wrap:wrap;gap:4px 14px;font-size:13.5px}
+.btn{appearance:none;font:600 13.5px var(--f-body);padding:8px 14px;border-radius:6px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);cursor:pointer;white-space:nowrap}
+.btn.ghost{background:transparent;color:var(--accent)}
+
+/* toolbar */
+.toolbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+.seg button{appearance:none;border:0;background:transparent;padding:8px 16px;font:600 14px var(--f-body);color:var(--muted);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.opts{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px;color:var(--muted)}
+.opts label{display:flex;align-items:center;gap:6px;cursor:pointer}
+input[type=checkbox]{accent-color:var(--accent)}
+
+/* checklist */
+.group{display:grid;gap:8px}
+.group + .group{margin-top:22px}
+.group h2{margin:0;display:flex;align-items:baseline;gap:10px;font:600 20px var(--f-display)}
+.group h2 .cnt{font:500 12px var(--f-mono);color:var(--muted)}
+.list{list-style:none;margin:0;padding:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.row{position:relative;display:grid;grid-template-columns:24px 84px minmax(0,1fr) auto;grid-template-areas:"chk date main status";gap:2px 14px;align-items:start;padding:14px 16px 14px 18px}
+.row + .row{border-top:1px solid var(--line)}
+.row::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:transparent}
+.row.s-open::before{background:var(--open)}
+.row.s-soon::before,.row.s-late::before{background:var(--deadline)}
+.r-chk{grid-area:chk;padding-top:2px}
+.r-chk input{width:19px;height:19px;margin:0;cursor:pointer}
+.mark{display:block;width:10px;height:10px;margin:6px 0 0 4px;border:1.5px solid var(--muted);transform:rotate(45deg)}
+.r-date{grid-area:date;display:flex;flex-direction:column;font-family:var(--f-mono);font-variant-numeric:tabular-nums;line-height:1.25}
+.r-date .d1{font-size:15px;font-weight:500}
+.r-date .d2{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.r-main{grid-area:main;min-width:0}
+.r-title{appearance:none;border:0;background:none;padding:0;margin:0;text-align:left;font:600 15.5px/1.35 var(--f-body);color:var(--ink);cursor:pointer;display:inline}
+.r-title::after{content:"";display:inline-block;width:6px;height:6px;margin:0 0 3px 8px;border-right:1.5px solid var(--muted);border-bottom:1.5px solid var(--muted);transform:rotate(45deg);transition:transform .15s}
+.r-title[aria-expanded="true"]::after{transform:rotate(-135deg);margin-bottom:0}
+.r-meta{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.chip{font:500 11.5px/1.5 var(--f-body);padding:0 7px;border:1px solid var(--line);border-radius:4px;color:var(--muted);white-space:nowrap}
+.chip.time{font-family:var(--f-mono)}
+.chip.src-team{border-style:dashed}
+.chip.src-egu{color:var(--accent);border-color:var(--accent)}
+.chip.opt{color:var(--opt);border-color:var(--opt)}
+.chip.owner{background:var(--accent-soft);color:var(--accent);border-color:transparent;font-weight:600}
+.r-status{grid-area:status;text-align:right}
+.pill{display:inline-block;font:600 12px/1.6 var(--f-body);padding:1px 9px;border-radius:999px;background:var(--sunk);color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.s-open .pill{background:var(--open-soft);color:var(--open)}
+.s-soon .pill{background:var(--deadline-soft);color:var(--deadline)}
+.s-late .pill{background:var(--deadline-soft);color:var(--deadline);outline:1px solid var(--deadline)}
+.s-done .pill{background:var(--done-soft);color:var(--done)}
+.is-done .r-title{color:var(--muted);text-decoration:line-through;text-decoration-thickness:1px}
+.s-past{opacity:.72}
+.r-details{margin-top:10px;font-size:14px;max-width:72ch}
+.r-details .when{margin:0 0 6px;font:500 12.5px var(--f-mono);color:var(--muted)}
+.r-details ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.r-links{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:10px;font-size:13.5px}
+.r-links .lab{color:var(--muted)}
+.ticked{margin-top:8px;font-size:12.5px;color:var(--done)}
+.empty-note{padding:18px;color:var(--muted)}
+
+/* calendar */
+.cal-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,380px);gap:20px;align-items:start}
+.months{display:grid;grid-template-columns:repeat(auto-fill,minmax(228px,1fr));gap:14px}
+.month{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 12px 10px}
+.month h3{margin:0 0 8px;font:600 16px var(--f-display)}
+.mgrid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px}
+.wd{font:500 10.5px var(--f-mono);color:var(--muted);text-align:center;padding-bottom:3px}
+.day{appearance:none;border:0;margin:0;padding:3px 0 2px;height:36px;border-radius:6px;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font:500 12.5px var(--f-mono);color:var(--ink);cursor:pointer;font-variant-numeric:tabular-nums}
+.day.empty{color:var(--muted)}
+.day.inrange{background:var(--accent-soft)}
+.day.today{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.day.sel{background:var(--ink);color:var(--bg)}
+.day:hover:not(.sel){box-shadow:inset 0 0 0 1px var(--accent)}
+.marks{display:flex;gap:2px;height:5px}
+.mk{display:block;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+.mk.k-deadline{background:var(--deadline);border-radius:0;transform:rotate(45deg) scale(.9)}
+.mk.k-milestone{background:var(--muted)}
+.mk.k-optional{background:var(--opt)}
+.mk.done{background:var(--done)}
+.day.sel .mk{background:var(--bg)}
+.daypanel{position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px);display:grid;gap:8px}
+.daypanel h2{margin:0;font:600 20px var(--f-display)}
+.daypanel .hint{margin:0;font-size:13px;color:var(--muted)}
+.compact .row{grid-template-columns:24px minmax(0,1fr) auto;grid-template-areas:"chk date status" "chk main main";gap:4px 12px}
+.compact .r-date{flex-direction:row;align-items:baseline;gap:8px}
+
+footer{display:grid;gap:8px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:18px}
+footer p{margin:0;max-width:80ch}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(18px + env(safe-area-inset-bottom,0px));max-width:calc(100% - 32px);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:8px;font-size:13.5px;box-shadow:0 6px 20px rgba(0,0,0,.18);z-index:20}
+
+@media (max-width:900px){
+  .cal-layout{grid-template-columns:minmax(0,1fr)}
+  .daypanel{position:static}
+  .subscribe{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:680px){
+  .summary{grid-template-columns:minmax(0,1fr)}
+  .row{grid-template-columns:24px minmax(0,1fr) auto;grid-template-areas:"chk date status" "chk main main";gap:4px 12px}
+  .r-date{flex-direction:row;align-items:baseline;gap:8px}
+  .band .full{display:none}.band .short{display:inline}
+  .band span{font-size:10.5px}
+}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">EGU General Assembly 2027 · Vienna &amp; online · 4–9 April 2027</p>
+    <h1><span class="code">HS4.10</span> Convener Calendar</h1>
+    <p class="lede">Probabilistic and ensemble forecasting of streamflow and other environmental variables — reducing, explaining, communicating, and acting on predictive uncertainty</p>
+    <ul class="team" id="team" aria-label="Convener team"></ul>
+  </header>
+
+  <section aria-labelledby="hz-h">
+    <h2 id="hz-h" class="vh">Season overview, November 2026 to May 2027</h2>
+    <div class="horizon"><div class="hz-in" id="hzIn"><canvas id="plume" aria-hidden="true"></canvas></div></div>
+    <ul class="legend">
+      <li><i class="lg-band"></i>Convener tool open</li>
+      <li><i class="lg-dl"></i>EGU deadline</li>
+      <li><i class="lg-now"></i>Today</li>
+      <li><i class="lg-plume"></i>Behind it: observed to date, ensemble ahead</li>
+    </ul>
+  </section>
+
+  <section class="summary" id="summary" aria-label="Where things stand"></section>
+
+  <section class="subscribe" aria-labelledby="sub-h">
+    <div>
+      <h2 id="sub-h">Put every date in your own calendar</h2>
+      <p>Subscribe once. Your calendar picks up any date we change on this page.</p>
+    </div>
+    <div>
+      <div class="sub-row">
+        <label class="vh" for="icsUrl">Calendar feed address</label>
+        <input id="icsUrl" readonly>
+        <button type="button" class="btn" id="copyIcs">Copy link</button>
+      </div>
+      <p class="sub-links">
+        <a id="subGoogle" target="_blank" rel="noopener">Add to Google Calendar</a>
+        <a id="subOutlook" target="_blank" rel="noopener">Add to Outlook</a>
+        <a id="subApple">Apple Calendar</a>
+        <a href="egu27-hs410.ics" download>Download .ics</a>
+      </p>
+    </div>
+  </section>
+
+  <div class="toolbar">
+    <div class="seg" role="group" aria-label="View">
+      <button type="button" id="v-checklist" aria-pressed="true">Checklist</button>
+      <button type="button" id="v-calendar" aria-pressed="false">Calendar</button>
+    </div>
+    <div class="opts">
+      <label><input type="checkbox" id="opt-hide-done"> Hide done</label>
+      <label><input type="checkbox" id="opt-hide-info"> Hide FYI milestones</label>
+    </div>
+  </div>
+
+  <main>
+    <div id="checklistView"></div>
+    <div id="calendarView" hidden></div>
+  </main>
+
+  <footer>
+    <p><strong>EGU date</strong> items come from the <a href="https://www.egu27.eu/about/deadlines_and_milestones.html" target="_blank" rel="noopener">EGU27 deadlines and milestones</a> and the <a href="https://www.egu27.eu/conveners/convener-guidelines.html" target="_blank" rel="noopener">convener guidelines</a>, checked on 10 Nov 2026. EGU's pages are the authority if anything changes. <strong>Team target</strong> items are our own suggested dates.</p>
+    <p>Ticks are saved in this browser only. Other conveners keep their own. <button type="button" class="btn ghost" id="clearTicks">Clear my ticks</button></p>
+    <p>Questions to Copernicus: <span style="user-select:all">egu27@copernicus.org</span></p>
+  </footer>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script type="application/json" id="tasks-data">
+{
+"site": "https://rafael3442.github.io/egu27-hs410/",
+"ics": "egu27-hs410.ics",
+"team": [
+  {"k": "IG", "name": "Inmaculada González Planet", "role": "Convener"},
+  {"k": "RF", "name": "Rafael Francisco", "role": "Co-convener"},
+  {"k": "JM", "name": "José Pedro Matos", "role": "Co-convener"},
+  {"k": "CJ", "name": "Carmelo Juez", "role": "Co-convener"}
+],
+"bands": [
+  {"l": "Abstract call", "sl": "Abstracts", "s": "2026-10-28", "e": "2027-01-12", "lane": 1},
+  {"l": "Support rating", "sl": "Rating", "s": "2026-12-02", "e": "2026-12-11", "lane": 0},
+  {"l": "SOI · SOII", "sl": "SOI/II", "s": "2027-01-14", "e": "2027-01-21", "lane": 0},
+  {"l": "SOIII", "sl": "SOIII", "s": "2027-02-09", "e": "2027-02-16", "lane": 0},
+  {"l": "OSPP judges and awards", "sl": "OSPP", "s": "2027-03-09", "e": "2027-04-30", "lane": 1},
+  {"l": "GA", "sl": "GA", "s": "2027-04-04", "e": "2027-04-09", "lane": 0, "ga": true}
+],
+"tasks": [
+  {"id": "confirm", "s": "2026-11-10", "asap": true, "k": "task", "src": "egu", "who": "each", "owner": "",
+   "title": "Confirm you accept the role (or decline quickly)",
+   "d": ["Assignment emails went out on 27 Oct 2026.", "Anyone who cannot convene should tell egu27@copernicus.org as soon as possible."],
+   "links": [["Convener guidelines", "https://www.egu27.eu/conveners/convener-guidelines.html"]]},
+  {"id": "promote1", "s": "2026-11-10", "e": "2026-11-30", "k": "task", "src": "team", "who": "team", "owner": "",
+   "title": "Advertise the call for abstracts, round 1",
+   "d": ["EGU advertises the conference, not single sessions, and gives out no mailing lists. Promotion is up to us.", "Channels: the HEPEX community, hydrology and forecasting mailing lists, our institutes, partner projects, LinkedIn, Bluesky and X.", "Quote both deadlines: support applications 1 Dec 2026, 13:00 CET; abstracts 12 Jan 2027, 13:00 CET.", "Size guide: about 15–22 abstracts fill one oral time block. Sessions with 5 or fewer abstracts are cancelled."],
+   "links": [["EGU27 home", "https://www.egu27.eu/"]]},
+  {"id": "profile", "s": "2026-11-13", "k": "task", "src": "team", "who": "each", "owner": "",
+   "title": "Log in, complete your profile, read the rules",
+   "d": ["Log in to the EGU27 dashboard with your Copernicus Office user ID.", "Check what is shown publicly next to your name in your personal data options.", "Complete your profile (gender, career stage, country of affiliation). An automatic check uses it to award the session's EDI logo.", "Read the convener guidelines and agree to the EGU code of conduct."],
+   "links": [["EGU27 dashboard", "https://meetingorganizer.copernicus.org/EGU27/dashboard"], ["Personal data options", "https://administrator.copernicus.org/personal_data/"], ["Rules of conduct", "https://www.egu27.eu/about/egu-ga-rules-of-conduct.html"]]},
+  {"id": "meetings", "s": "2026-11-18", "k": "optional", "src": "egu", "who": "team", "owner": "",
+   "title": "Townhall and splinter meeting requests open",
+   "d": ["Optional: a side meeting, for example for the HEPEX community.", "Townhall requests close 20 Jan 2027. Splinter meeting requests close 31 Mar 2027."],
+   "links": [["Deadlines and milestones", "https://www.egu27.eu/about/deadlines_and_milestones.html"]]},
+  {"id": "kickoff", "s": "2026-11-20", "k": "task", "src": "team", "who": "team", "owner": "",
+   "title": "Team kick-off call: split the roles",
+   "d": ["Agree who leads each job: advertising, the solicited speaker and TAN, support-application ratings, abstract review in January, OSPP judges, chairing in Vienna.", "Confirm which convener is the session's OSPP contact (named in the proposal).", "Decide on extras: a special issue (for example HESS, NHESS or ADGEO), a splinter or townhall meeting.", "Write the owners into this page (the owner field in index.html) so everyone sees them."],
+   "links": []},
+  {"id": "sessiontext", "s": "2026-11-20", "k": "task", "src": "team", "who": "lead", "owner": "",
+   "title": "Check the session text and convener list",
+   "d": ["Open the session modification tool and check the title, description, keywords and convener order.", "Check how HS4.10 appears in the public programme."],
+   "links": [["Session modification tool", "https://meetingorganizer.copernicus.org/EGU27/sessionmodification/59896"], ["EGU27 programme", "https://meetingorganizer.copernicus.org/EGU27/programme"]]},
+  {"id": "solicited", "s": "2026-11-30", "k": "task", "src": "team", "who": "team", "owner": "",
+   "title": "Invite the solicited speaker and send the TAN",
+   "d": ["At most one solicited abstract per time block. Conveners cannot be solicited speakers in their own session.", "Generate the session's TAN from the session overview when logged in, and send it straight to the speaker. Extra TANs only through the programme group chair.", "The TAN lets the speaker submit a second first-author abstract (one regular plus one solicited).", "Solicited speakers get no fee discount or travel support. Send the TAN early."],
+   "links": [["EGU27 dashboard", "https://meetingorganizer.copernicus.org/EGU27/dashboard"]]},
+  {"id": "supportdl", "s": "2026-12-01", "t": "13:00 CET", "utc": "2026-12-01T12:00:00Z", "k": "deadline", "src": "egu", "who": "team", "owner": "",
+   "title": "Support applications close for authors",
+   "d": ["Early-career and other eligible authors must submit their abstract and support application by this time.", "Send a last reminder to students and early-career contacts in the week before."],
+   "links": [["Financial support and waivers", "https://www.egu27.eu/attendance/financial_support_and_waivers.html"]]},
+  {"id": "rate", "s": "2026-12-02", "e": "2026-12-11", "k": "task", "src": "egu", "who": "team", "owner": "",
+   "title": "Rate the support applications in HS4.10",
+   "d": ["The rating tool opens in Meeting Organizer. Rate the scientific quality and importance of each applicant's contribution.", "Every application must be rated, or the applicant cannot qualify for support.", "Read the abstracts yourselves: EGU does not allow AI tools for abstract review, and abstract text must not be pasted into them.", "Conveners get no automatic fee waivers."],
+   "links": [["EGU27 dashboard", "https://meetingorganizer.copernicus.org/EGU27/dashboard"]]},
+  {"id": "promote2", "s": "2026-12-14", "k": "task", "src": "team", "who": "team", "owner": "",
+   "title": "Advertise round 2, before the holidays",
+   "d": ["Repost the call with the abstract deadline: 12 Jan 2027, 13:00 CET.", "Ask colleagues and project partners to forward it."],
+   "links": []},
+  {"id": "promote3", "s": "2027-01-05", "k": "task", "src": "team", "who": "team", "owner": "",
+   "title": "Final call: one week to the abstract deadline",
+   "d": ["Last reminder on all channels. Abstracts close Tue 12 Jan 2027, 13:00 CET."],
+   "links": []},
+  {"id": "supportout", "s": "2027-01-11", "k": "milestone", "src": "egu", "who": "info", "owner": "",
+   "title": "Support selection results announced",
+   "d": ["Applicants and conveners learn the outcome of the support selection."],
+   "links": []},
+  {"id": "abstractdl", "s": "2027-01-12", "t": "13:00 CET", "utc": "2027-01-12T12:00:00Z", "k": "deadline", "src": "egu", "who": "team", "owner": "",
+   "title": "Abstract submission deadline",
+   "d": ["Check the abstract count straight after. Sessions with 5 or fewer abstracts are cancelled automatically, and late abstracts do not count.", "Our own abstracts: a convener cannot be the presenting author of an oral in HS4.10 and should avoid co-authoring orals in it.", "First authors may submit one regular plus one solicited abstract."],
+   "links": [["Session modification tool", "https://meetingorganizer.copernicus.org/EGU27/sessionmodification/59896"]]},
+  {"id": "soi", "s": "2027-01-14", "e": "2027-01-20", "k": "task", "src": "egu", "who": "team", "owner": "",
+   "title": "SOI: review abstracts, decide on mergers",
+   "d": ["Read every abstract in HS4.10 and those suggested for transfer into it. Look closely at abstracts the system flags.", "No AI tools for review, and no abstract text pasted into them.", "Tick ‘public interest’ on a few abstracts suited to general attendees.", "Mergers: inform the Hydrological Sciences programme group chair first; agree title, description and conveners; move and accept the abstracts; then withdraw the emptied session. Tell authors of transferred abstracts and give them time to choose another session."],
+   "links": [["Convener guidelines", "https://www.egu27.eu/conveners/convener-guidelines.html"]]},
+  {"id": "soii", "s": "2027-01-14", "e": "2027-01-21", "k": "task", "src": "egu", "who": "team", "owner": "",
+   "title": "SOII: tag the session for scheduling",
+   "d": ["Give the expected audience size so we get a suitable room.", "Request back-to-back or no-overlap with related sessions, for example other HS4 forecasting sessions.", "With no input the session is marked ‘no requests’. The programme group chair tries to meet requests but cannot guarantee them.", "Last chance to flag interest in a special issue."],
+   "links": []},
+  {"id": "emergency", "s": "2027-01-14", "e": "2027-01-15", "t": "13:00 CET", "utc": "2027-01-15T12:00:00Z", "k": "deadline", "src": "egu", "who": "team", "owner": "",
+   "title": "Emergency abstracts: last upload",
+   "d": ["Only conveners can upload them, for authors who hit a technical or personal emergency before the deadline.", "Each one needs approval from the programme group chair. The author pays a higher fee and must be an EGU member.", "Never use them to reach a size threshold such as an oral block. Hard stop: 15 Jan 2027, 13:00 CET."],
+   "links": []},
+  {"id": "townhall", "s": "2027-01-20", "k": "optional", "src": "egu", "who": "team", "owner": "",
+   "title": "Townhall meeting request deadline",
+   "d": ["Only if we plan a townhall meeting."],
+   "links": []},
+  {"id": "scheduling", "s": "2027-01-25", "e": "2027-02-03", "k": "milestone", "src": "egu", "who": "info", "owner": "",
+   "title": "Programme committee schedules the sessions",
+   "d": ["The programme group chair sets day, time and room. No action from us."],
+   "links": []},
+  {"id": "letters", "s": "2027-02-04", "e": "2027-02-05", "k": "milestone", "src": "egu", "who": "info", "owner": "",
+   "title": "Acceptance letters; our time and room arrive",
+   "d": ["Authors receive acceptance or rejection letters. Conveners receive the session's time and room by email."],
+   "links": []},
+  {"id": "prepsoiii", "s": "2027-02-08", "k": "task", "src": "team", "who": "team", "owner": "",
+   "title": "Team call: agree orals, posters and chairs",
+   "d": ["Agree which abstracts become orals, on-site posters and virtual posters, and the running order.", "Pick at least two chairs per time block, both on site."],
+   "links": []},
+  {"id": "soiii", "s": "2027-02-09", "e": "2027-02-16", "k": "task", "src": "egu", "who": "team", "owner": "",
+   "title": "SOIII: build the session programme",
+   "d": ["Split abstracts into oral, on-site poster and virtual poster presentations, and set their order.", "Each regular oral gets 10 minutes, questions and changeover included. Up to 3 subtitles per time block.", "Give the solicited talk a 10, 20 or 30 minute slot (one per time block).", "Name at least two chairpersons per time block, both on site.", "Optional: list the solicited speaker at the end of the session description."],
+   "links": [["Session modification tool", "https://meetingorganizer.copernicus.org/EGU27/sessionmodification/59896"]]},
+  {"id": "programme", "s": "2027-03-01", "k": "task", "src": "egu", "who": "lead", "owner": "",
+   "title": "Check HS4.10 in the online programme",
+   "d": ["Letters of schedule go to authors and the full programme goes online. Check our slot, order and chairs."],
+   "links": [["EGU27 programme", "https://meetingorganizer.copernicus.org/EGU27/programme"]]},
+  {"id": "register", "s": "2027-03-08", "t": "13:00 CEST", "utc": "2027-03-08T11:00:00Z", "k": "deadline", "src": "egu", "who": "each", "owner": "",
+   "title": "Register at the early rate",
+   "d": ["Conveners register and pay like everyone else; there are no automatic waivers.", "Same deadline for visa letters of invitation and for name badge pre-delivery.", "EGU lists this time as CEST, but 8 March is still winter time. Register before 12:00 CET to be safe."],
+   "links": [["Registration", "https://www.egu27.eu/attendance/registration.html"]]},
+  {"id": "ospp", "s": "2027-03-09", "e": "2027-04-18", "k": "task", "src": "egu", "who": "ospp", "owner": "",
+   "title": "Recruit OSPP judges (nominator tool)",
+   "d": ["Outstanding Student and PhD candidate Presentation contest: the guidelines ask for 3–5 judges per poster or PICO presentation.", "Judges need a PhD or equivalent, must attend EGU, cannot co-author the work they judge, and cannot compete themselves.", "Conveners and chairs may judge."],
+   "links": []},
+  {"id": "uploads", "s": "2027-03-10", "k": "milestone", "src": "egu", "who": "info", "owner": "",
+   "title": "Presentation upload opens for authors",
+   "d": ["Authors can upload presentation files and supplementary material until 30 Apr 2027."],
+   "links": []},
+  {"id": "authorsmail", "s": "2027-03-12", "k": "task", "src": "team", "who": "team", "owner": "",
+   "title": "Email authors; add public session info",
+   "d": ["Use the session mailing list tool (EGU matters only). Confirm every presenter will attend; no-shows are marked ‘withdrawn after no-show’.", "Share the presenter guidelines: speak from the lectern, use the microphone, give virtual presenters the same attention.", "Ask presenters to upload files at least 24 hours before the session starts.", "Add a short public information text to the session for the online programme."],
+   "links": [["Session modification tool", "https://meetingorganizer.copernicus.org/EGU27/sessionmodification/59896"]]},
+  {"id": "lastchange", "s": "2027-03-24", "t": "13:00 CET", "utc": "2027-03-24T12:00:00Z", "k": "deadline", "src": "egu", "who": "lead", "owner": "",
+   "title": "Last changes to the on-site daily programme",
+   "d": ["Send changes to egu27@copernicus.org. After this time the on-site daily programme is fixed."],
+   "links": []},
+  {"id": "chairs", "s": "2027-03-29", "k": "task", "src": "team", "who": "team", "owner": "",
+   "title": "Confirm chairs and the run of show",
+   "d": ["Per time block: one on-site chair runs the room, a second moderates virtual presenters and the Zoom chat.", "Agree who keeps time and who watches for no-shows."],
+   "links": []},
+  {"id": "splinter", "s": "2027-03-31", "k": "optional", "src": "egu", "who": "team", "owner": "",
+   "title": "Splinter meeting request deadline",
+   "d": ["Only if we plan a splinter meeting."],
+   "links": []},
+  {"id": "ga", "s": "2027-04-04", "e": "2027-04-09", "k": "task", "src": "egu", "who": "team", "owner": "",
+   "title": "EGU General Assembly, Vienna and online",
+   "d": ["Austria Center Vienna. Time blocks start at 08:30, 10:45, 14:00 and 16:15 CEST and last 105 minutes.", "Before the session: check both chairs are present.", "Keep orals to time, questions included. Questions come from the room microphones and from the Zoom chat.", "Presenters stand behind the lectern so the camera frames them."],
+   "links": []},
+  {"id": "judging", "s": "2027-04-05", "e": "2027-04-18", "k": "task", "src": "egu", "who": "ospp", "owner": "",
+   "title": "OSPP judging: chase the evaluations",
+   "d": ["Make sure every judge submits their evaluations."],
+   "links": []},
+  {"id": "award", "s": "2027-04-19", "e": "2027-04-30", "k": "task", "src": "egu", "who": "ospp", "owner": "",
+   "title": "OSPP award selection (coordinator tool)",
+   "d": ["The coordinator tool is open 9 Mar – 30 Apr 2027."],
+   "links": []},
+  {"id": "close", "s": "2027-05-30", "k": "deadline", "src": "egu", "who": "team", "owner": "",
+   "title": "Convener login closes",
+   "d": ["Last day for anything in Meeting Organizer. Follow up on a special issue if we planned one."],
+   "links": []}
+]
+}
+</script>
+<script>
+(function () {
+  'use strict';
+  var DATA = JSON.parse(document.getElementById('tasks-data').textContent);
+  var TASKS = DATA.tasks.slice().sort(function (a, b) { return a.s.localeCompare(b.s) || endOf(a).localeCompare(endOf(b)); });
+  var WHO = { each: 'Each convener', team: 'Team', lead: 'Main convener', ospp: 'OSPP contact', info: 'FYI' };
+  var MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var MONTH = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var WD = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  var DAY = 864e5;
+  var SITE = DATA.site;
+
+  function endOf(t) { return t.e || t.s; }
+  function toT(s) { var p = s.split('-').map(Number); return Date.UTC(p[0], p[1] - 1, p[2]); }
+  function isoOf(t) { return new Date(t).toISOString().slice(0, 10); }
+  function pad(n) { return String(n).padStart(2, '0'); }
+  function localToday() { var n = new Date(); return n.getFullYear() + '-' + pad(n.getMonth() + 1) + '-' + pad(n.getDate()); }
+  function diff(a, b) { return Math.round((toT(b) - toT(a)) / DAY); }
+  function fmtLong(s) { var d = new Date(toT(s)); return WD[d.getUTCDay()] + ' ' + d.getUTCDate() + ' ' + MON[d.getUTCMonth()] + ' ' + d.getUTCFullYear(); }
+  function fmtShort(s) { var d = new Date(toT(s)); return d.getUTCDate() + ' ' + MON[d.getUTCMonth()]; }
+  function $(s) { return document.querySelector(s); }
+
+  // Small element builder: h('div', {class: 'x', onclick: fn}, child, ...)
+  function h(tag, props) {
+    var el = document.createElement(tag);
+    if (props) Object.keys(props).forEach(function (k) {
+      var v = props[k];
+      if (v == null || v === false) return;
+      if (k === 'class') el.className = v;
+      else if (k.slice(0, 2) === 'on') el.addEventListener(k.slice(2), v);
+      else el.setAttribute(k, v === true ? '' : v);
+    });
+    for (var i = 2; i < arguments.length; i++) append(el, arguments[i]);
+    return el;
+  }
+  function append(el, c) {
+    if (c == null || c === false) return;
+    if (Array.isArray(c)) { c.forEach(function (x) { append(el, x); }); return; }
+    el.append(c.nodeType ? c : document.createTextNode(String(c)));
+  }
+
+  var store = {
+    get: function (k, d) { try { var v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+    set: function (k, v) { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (e) { return false; } }
+  };
+  var KEY = 'egu27-hs410:ticks:v1', PKEY = 'egu27-hs410:prefs:v1';
+  var ticks = store.get(KEY, {}) || {};
+  var prefs = Object.assign({ hideDone: false, hideInfo: false, expanded: [] }, store.get(PKEY, {}) || {});
+  var expanded = new Set(prefs.expanded || []);
+  var TODAY = localToday();
+  var view = location.hash === '#calendar' ? 'calendar' : 'checklist';
+  var selectedDay = null;
+
+  function savePrefs() { prefs.expanded = Array.from(expanded); store.set(PKEY, prefs); }
+  function isDone(t) { return t.k !== 'milestone' && !!ticks[t.id]; }
+  function isRange(t) { return !!t.e && t.e !== t.s; }
+
+  function status(t) {
+    var e = endOf(t), T = TODAY, n;
+    if (t.k === 'milestone') {
+      if (e < T) return { c: 'past', l: 'Passed' };
+      if (t.s <= T) return { c: 'open', l: isRange(t) ? 'Running now' : 'Today' };
+      n = diff(T, t.s); return { c: 'up', l: n === 1 ? 'Tomorrow' : 'In ' + n + ' days' };
+    }
+    if (isDone(t)) return { c: 'done', l: 'Done' };
+    if (t.asap) return { c: 'soon', l: 'As soon as possible' };
+    if (e < T) return { c: t.k === 'optional' ? 'past' : 'late', l: t.k === 'optional' ? 'Passed' : (t.src === 'team' ? 'Target passed' : 'Overdue') };
+    if (t.s <= T) {
+      n = diff(T, e);
+      if (isRange(t)) return { c: 'open', l: n === 0 ? 'Closes today' : 'Open · ' + n + (n === 1 ? ' day' : ' days') + ' left' };
+      return { c: 'soon', l: t.k === 'deadline' ? 'Due today' : 'Today' };
+    }
+    n = diff(T, t.s);
+    var c = n <= 7 ? 'soon' : 'up';
+    if (t.k === 'deadline') return { c: c, l: n === 1 ? 'Due tomorrow' : 'Due in ' + n + ' days' };
+    if (isRange(t)) return { c: c, l: n === 1 ? 'Opens tomorrow' : 'Opens in ' + n + ' days' };
+    return { c: c, l: n === 1 ? 'Tomorrow' : 'In ' + n + ' days' };
+  }
+
+  function visible(t) {
+    if (prefs.hideInfo && t.k === 'milestone') return false;
+    if (prefs.hideDone && isDone(t)) return false;
+    return true;
+  }
+
+  // Single-event calendar links. Timed deadlines become a 30-minute slot ending at the deadline.
+  function calText(t) { return t.d.join('\n') + '\n\n' + SITE; }
+  function stamp(d) { return d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, ''); }
+  function gcalUrl(t) {
+    var p = new URLSearchParams({ action: 'TEMPLATE', text: 'HS4.10: ' + t.title, details: calText(t) });
+    if (t.utc) { var end = new Date(t.utc); p.set('dates', stamp(new Date(end - 18e5)) + '/' + stamp(end)); }
+    else p.set('dates', t.s.replace(/-/g, '') + '/' + isoOf(toT(endOf(t)) + DAY).replace(/-/g, ''));
+    return 'https://calendar.google.com/calendar/render?' + p.toString();
+  }
+  function outlookUrl(t) {
+    var p = new URLSearchParams({ path: '/calendar/action/compose', rru: 'addevent', subject: 'HS4.10: ' + t.title, body: calText(t) });
+    if (t.utc) { var end = new Date(t.utc); p.set('startdt', new Date(end - 18e5).toISOString()); p.set('enddt', end.toISOString()); }
+    else { p.set('startdt', t.s); p.set('enddt', isoOf(toT(endOf(t)) + DAY)); p.set('allday', 'true'); }
+    return 'https://outlook.office.com/calendar/0/deeplink/compose?' + p.toString();
+  }
+
+  function dateBlock(t) {
+    var a = new Date(toT(t.s)), b = new Date(toT(endOf(t))), top, bot;
+    if (t.asap) { top = 'ASAP'; bot = 'now'; }
+    else if (!isRange(t)) { top = String(a.getUTCDate()); bot = MON[a.getUTCMonth()] + ' · ' + WD[a.getUTCDay()]; }
+    else if (a.getUTCMonth() === b.getUTCMonth()) { top = a.getUTCDate() + '–' + b.getUTCDate(); bot = MON[a.getUTCMonth()]; }
+    else { top = a.getUTCDate() + ' ' + MON[a.getUTCMonth()]; bot = '→ ' + b.getUTCDate() + ' ' + MON[b.getUTCMonth()]; }
+    return h('div', { class: 'r-date' }, h('span', { class: 'd1' }, top), h('span', { class: 'd2' }, bot));
+  }
+
+  function row(t, ctx) {
+    var st = status(t), done = isDone(t), open = expanded.has(t.id);
+    var detId = ctx + '-det-' + t.id;
+    var left;
+    if (t.k === 'milestone') left = h('span', { class: 'mark', title: 'Milestone, nothing to tick' });
+    else {
+      left = h('input', { type: 'checkbox', id: ctx + '-chk-' + t.id, 'aria-label': (t.who === 'each' ? 'My part done: ' : 'Done: ') + t.title });
+      left.checked = done;
+      left.addEventListener('change', function () { setTick(t.id, left.checked); });
+    }
+    var when = (t.asap ? 'As soon as possible' : (isRange(t) ? fmtLong(t.s) + ' – ' + fmtLong(endOf(t)) : fmtLong(t.s))) + (t.t ? ', ' + t.t : '');
+    var details = h('div', { class: 'r-details', id: detId, hidden: !open },
+      h('p', { class: 'when' }, when),
+      h('ul', null, t.d.map(function (x) { return h('li', null, x); })),
+      h('div', { class: 'r-links' },
+        t.links.map(function (l) { return h('a', { href: l[1], target: '_blank', rel: 'noopener' }, l[0]); }),
+        t.asap ? null : [h('span', { class: 'lab' }, 'Add this one:'),
+          h('a', { href: gcalUrl(t), target: '_blank', rel: 'noopener' }, 'Google'),
+          h('a', { href: outlookUrl(t), target: '_blank', rel: 'noopener' }, 'Outlook')]
+      ),
+      done && ticks[t.id].at ? h('p', { class: 'ticked' }, 'You ticked this on ' + fmtLong(ticks[t.id].at) + '.') : null
+    );
+    var title = h('button', { type: 'button', class: 'r-title', 'aria-expanded': String(open), 'aria-controls': detId, id: ctx + '-ttl-' + t.id,
+      onclick: function () { if (expanded.has(t.id)) expanded.delete(t.id); else expanded.add(t.id); savePrefs(); render(); } }, t.title);
+    var meta = h('div', { class: 'r-meta' },
+      h('span', { class: 'chip who' }, WHO[t.who]),
+      h('span', { class: 'chip src-' + t.src }, t.src === 'egu' ? 'EGU date' : 'Team target'),
+      t.t ? h('span', { class: 'chip time' }, t.t) : null,
+      t.k === 'optional' ? h('span', { class: 'chip opt' }, 'Optional') : null,
+      t.owner ? h('span', { class: 'chip owner', title: 'Owner' }, t.owner) : null
+    );
+    return h('li', { class: 'row k-' + t.k + ' s-' + st.c + (done ? ' is-done' : '') },
+      h('div', { class: 'r-chk' }, left),
+      dateBlock(t),
+      h('div', { class: 'r-main' }, title, meta, details),
+      h('div', { class: 'r-status' }, h('span', { class: 'pill' }, st.l))
+    );
+  }
+
+  function setTick(id, on) {
+    if (on) ticks[id] = { at: TODAY }; else delete ticks[id];
+    if (!store.set(KEY, ticks)) toast('This browser is blocking storage, so ticks will be lost when you close the page.');
+    render();
+  }
+
+  function renderSummary() {
+    var box = $('#summary'); box.replaceChildren();
+    var act = TASKS.filter(function (t) { return t.k !== 'milestone'; });
+    var doneN = act.filter(isDone).length;
+    var openN = act.filter(function (t) { return !isDone(t) && (t.asap || (t.s <= TODAY && endOf(t) >= TODAY)); }).length;
+    // Next EGU date: the nearest upcoming opening or closing among EGU items not ticked
+    var cands = [];
+    TASKS.forEach(function (t) {
+      if (t.src !== 'egu' || t.k === 'milestone' || t.k === 'optional' || t.asap || isDone(t)) return;
+      if (t.s > TODAY && isRange(t)) cands.push({ t: t, d: t.s, verb: 'opens' });
+      else if (endOf(t) >= TODAY) cands.push({ t: t, d: endOf(t), verb: t.k === 'deadline' ? 'due' : (isRange(t) ? 'closes' : 'on') });
+    });
+    cands.sort(function (a, b) { return a.d.localeCompare(b.d); });
+    var nx = cands[0];
+    if (nx) {
+      var n = diff(TODAY, nx.d);
+      box.append(h('div', { class: 'stat' },
+        h('span', { class: 'lab' }, 'Next EGU date'),
+        h('span', { class: 'big' }, n === 0 ? 'Today' : String(n), n === 0 ? null : h('small', null, n === 1 ? 'day' : 'days')),
+        h('span', { class: 'what' }, nx.t.title),
+        h('span', { class: 'sub' }, nx.verb.charAt(0).toUpperCase() + nx.verb.slice(1) + ' ' + fmtLong(nx.d) + (nx.t.t && nx.verb !== 'opens' ? ', ' + nx.t.t : ''))));
+    }
+    var key = [['abstractdl', 'Abstracts close'], ['ga', 'General Assembly starts'], ['close', 'Convener login closes']]
+      .map(function (p) { return { t: TASKS.find(function (x) { return x.id === p[0]; }), lab: p[1] }; })
+      .filter(function (k) { return k.t.s >= TODAY; })[0];
+    if (key) {
+      var m = diff(TODAY, key.t.s);
+      box.append(h('div', { class: 'stat' },
+        h('span', { class: 'lab' }, key.lab),
+        h('span', { class: 'big' }, m === 0 ? 'Today' : String(m), m === 0 ? null : h('small', null, m === 1 ? 'day' : 'days')),
+        h('span', { class: 'what' }, fmtLong(key.t.s) + (key.t.t ? ', ' + key.t.t : '')),
+        h('span', { class: 'sub' }, key.t.id === 'abstractdl' ? 'Sessions with 5 or fewer abstracts are cancelled' : (key.t.id === 'ga' ? 'Austria Center Vienna and online' : 'Last day in Meeting Organizer'))));
+    }
+    box.append(h('div', { class: 'stat' },
+      h('span', { class: 'lab' }, 'Your ticks'),
+      h('span', { class: 'big' }, String(doneN), h('small', null, 'of ' + act.length)),
+      h('div', { class: 'bar', role: 'img', 'aria-label': doneN + ' of ' + act.length + ' done' }, h('i', { style: 'width:' + (act.length ? doneN / act.length * 100 : 0).toFixed(1) + '%' })),
+      h('span', { class: 'sub' }, openN + (openN === 1 ? ' item open now' : ' items open now') + ' · saved in this browser')));
+  }
+
+  function renderChecklist() {
+    var box = $('#checklistView'); box.replaceChildren();
+    var vis = TASKS.filter(visible);
+    if (!vis.length) { box.append(h('p', { class: 'empty-note' }, 'Everything is hidden. Untick “Hide done” to see your finished items.')); return; }
+    var groups = [];
+    vis.forEach(function (t) {
+      var k = t.s.slice(0, 7), g = groups[groups.length - 1];
+      if (!g || g.k !== k) groups.push(g = { k: k, items: [] });
+      g.items.push(t);
+    });
+    groups.forEach(function (g) {
+      var y = +g.k.slice(0, 4), mo = +g.k.slice(5, 7) - 1;
+      var left = g.items.filter(function (t) { return t.k !== 'milestone' && !isDone(t); }).length;
+      box.append(h('section', { class: 'group', 'aria-label': MONTH[mo] + ' ' + y },
+        h('h2', null, MONTH[mo] + ' ' + y, h('span', { class: 'cnt' }, left ? left + ' to do' : 'all done')),
+        h('ul', { class: 'list' }, g.items.map(function (t) { return row(t, 'l'); }))));
+    });
+  }
+
+  var CAL_MONTHS = [[2026, 10], [2026, 11], [2027, 0], [2027, 1], [2027, 2], [2027, 3], [2027, 4]];
+  function itemsOn(iso, list) { return list.filter(function (t) { return t.s <= iso && iso <= endOf(t); }); }
+  function renderCalendar() {
+    var box = $('#calendarView'); box.replaceChildren();
+    var vis = TASKS.filter(visible);
+    if (!selectedDay) {
+      selectedDay = (TODAY >= '2026-11-01' && TODAY <= '2027-05-31') ? TODAY : TASKS[0].s;
+    }
+    var months = h('div', { class: 'months' });
+    CAL_MONTHS.forEach(function (ym) {
+      var y = ym[0], m = ym[1];
+      var n = new Date(Date.UTC(y, m + 1, 0)).getUTCDate();
+      var lead = (new Date(Date.UTC(y, m, 1)).getUTCDay() + 6) % 7;
+      var cells = ['M', 'T', 'W', 'T', 'F', 'S', 'S'].map(function (w) { return h('span', { class: 'wd', 'aria-hidden': 'true' }, w); });
+      for (var i = 0; i < lead; i++) cells.push(h('span'));
+      for (var d = 1; d <= n; d++) (function (iso, d) {
+        var its = itemsOn(iso, vis);
+        var cls = ['day'];
+        if (!its.length) cls.push('empty');
+        if (its.some(function (t) { return isRange(t) && t.k !== 'milestone'; })) cls.push('inrange');
+        if (iso === TODAY) cls.push('today');
+        if (iso === selectedDay) cls.push('sel');
+        cells.push(h('button', {
+          type: 'button', class: cls.join(' '), id: 'day-' + iso, 'aria-pressed': String(iso === selectedDay),
+          'aria-label': fmtLong(iso) + ': ' + (its.length ? its.length + (its.length > 1 ? ' items' : ' item') : 'nothing scheduled'),
+          onclick: function () {
+            selectedDay = iso; render();
+            if (window.matchMedia('(max-width:900px)').matches) {
+              var p = $('#daypanel'); if (p) p.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+            }
+          }
+        }, h('span', null, String(d)), h('span', { class: 'marks', 'aria-hidden': 'true' },
+          its.slice(0, 3).map(function (t) { return h('i', { class: 'mk k-' + t.k + (isDone(t) ? ' done' : '') }); }))));
+      })(y + '-' + pad(m + 1) + '-' + pad(d), d);
+      months.append(h('section', { class: 'month', 'aria-label': MONTH[m] + ' ' + y }, h('h3', null, MONTH[m] + ' ' + y), h('div', { class: 'mgrid' }, cells)));
+    });
+    var its = itemsOn(selectedDay, vis);
+    var nextAfter = vis.filter(function (t) { return t.s > selectedDay; })[0];
+    var panel = h('section', { class: 'daypanel', id: 'daypanel', 'aria-live': 'polite' },
+      h('h2', null, fmtLong(selectedDay)),
+      its.length ? h('ul', { class: 'list compact' }, its.map(function (t) { return row(t, 'c'); }))
+        : h('p', { class: 'hint' }, 'Nothing scheduled on this day.' + (nextAfter ? ' Next: ' + nextAfter.title + ', ' + fmtShort(nextAfter.s) + '.' : '')),
+      h('p', { class: 'hint' }, 'Pick a day to see what is open or due.'));
+    box.append(h('div', { class: 'cal-layout' }, months, panel));
+  }
+
+  function render() {
+    var a = document.activeElement, aid = a && a.id;
+    TODAY = localToday();
+    renderSummary();
+    $('#checklistView').hidden = view !== 'checklist';
+    $('#calendarView').hidden = view !== 'calendar';
+    $('#v-checklist').setAttribute('aria-pressed', String(view === 'checklist'));
+    $('#v-calendar').setAttribute('aria-pressed', String(view === 'calendar'));
+    if (view === 'checklist') renderChecklist(); else renderCalendar();
+    if (aid && document.activeElement !== document.getElementById(aid)) { var el = document.getElementById(aid); if (el) el.focus({ preventScroll: true }); }
+  }
+
+  // Season strip: task windows and deadlines on a Nov 2026 – May 2027 axis.
+  var H0 = toT('2026-11-01'), H1 = toT('2027-06-01');
+  function pct(s) { return Math.max(0, Math.min(100, (toT(s) - H0) / (H1 - H0) * 100)); }
+  function buildHorizon() {
+    var box = $('#hzIn');
+    DATA.bands.forEach(function (b) {
+      var l = pct(b.s), r = pct(isoOf(toT(b.e) + DAY));
+      box.append(h('div', { class: 'band lane' + b.lane + (b.ga ? ' ga' : ''), style: 'left:' + l + '%;width:' + Math.max(r - l, 0.8) + '%', title: b.l + ': ' + fmtShort(b.s) + ' – ' + fmtShort(b.e) },
+        h('span', { class: 'full' }, b.l), h('span', { class: 'short' }, b.sl)));
+    });
+    TASKS.filter(function (t) { return t.k === 'deadline' && t.src === 'egu'; }).forEach(function (t) {
+      box.append(h('div', { class: 'tick', style: 'left:' + pct(endOf(t)) + '%', title: t.title + ': ' + fmtLong(endOf(t)) + (t.t ? ', ' + t.t : '') }));
+    });
+    var ax = h('div', { class: 'axis', 'aria-hidden': 'true' });
+    for (var y = 2026, m = 10; toT(y + '-' + pad(m + 1) + '-01') < H1; ) {
+      ax.append(h('span', { style: 'left:calc(14px + (100% - 28px) * ' + (pct(y + '-' + pad(m + 1) + '-01') / 100) + ')' }, MON[m]));
+      if (++m > 11) { m = 0; y++; }
+    }
+    box.append(ax);
+    if (TODAY >= '2026-11-01' && TODAY < '2027-06-01') box.append(h('div', { class: 'now', style: 'left:' + pct(TODAY) + '%' }, h('b', null, 'Today')));
+    drawPlume();
+  }
+
+  // Seeded random so the plume looks the same on every load.
+  function rng(seed) { return function () { seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  function gauss(r) { var u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); }
+  function drawPlume() {
+    var c = $('#plume'), box = c.getBoundingClientRect();
+    if (!box.width) return;
+    var dpr = Math.min(2, window.devicePixelRatio || 1);
+    c.width = Math.round(box.width * dpr); c.height = Math.round(box.height * dpr);
+    var g = c.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, box.width, box.height);
+    var cs = getComputedStyle(document.documentElement);
+    var plume = cs.getPropertyValue('--plume').trim(), ink = cs.getPropertyValue('--ink').trim();
+    var W = box.width, top = 72, bot = box.height - 30, mid = (top + bot) / 2, amp = (bot - top) / 2;
+    var xNow = W * pct(TODAY) / 100, step = 3, r = rng(2027), y = 0, pts = [];
+    var clamp = function (v) { return Math.max(-1, Math.min(1, v)); };
+    for (var x = 0; x <= xNow; x += step) { y = clamp(y - 0.08 * y + gauss(r) * 0.1); pts.push([x, y]); }
+    g.lineWidth = 1; g.strokeStyle = plume; g.globalAlpha = 0.28;
+    for (var i = 0; i < 28; i++) {
+      var rr = rng(100 + i), yy = y;
+      g.beginPath(); g.moveTo(xNow, mid - yy * amp);
+      for (var x2 = xNow + step; x2 <= W + step; x2 += step) { yy = clamp(yy - 0.012 * yy + gauss(rr) * 0.065); g.lineTo(x2, mid - yy * amp); }
+      g.stroke();
+    }
+    g.globalAlpha = 1; g.lineWidth = 1.6; g.strokeStyle = ink; g.beginPath();
+    pts.forEach(function (p, k) { if (k) g.lineTo(p[0], mid - p[1] * amp); else g.moveTo(p[0], mid - p[1] * amp); });
+    g.stroke();
+  }
+
+  var toastTimer;
+  function toast(msg) {
+    var t = $('#toast'); t.textContent = msg; t.hidden = false;
+    clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.hidden = true; }, 4200);
+  }
+
+  function setupSubscribe() {
+    var ics = new URL(DATA.ics, SITE).href;
+    var webcal = ics.replace(/^https:/, 'webcal:');
+    var inp = $('#icsUrl'); inp.value = ics;
+    $('#subGoogle').href = 'https://calendar.google.com/calendar/render?cid=' + encodeURIComponent(webcal);
+    $('#subOutlook').href = 'https://outlook.office.com/calendar/0/addfromweb?url=' + encodeURIComponent(ics) + '&name=' + encodeURIComponent('EGU27 HS4.10 conveners');
+    $('#subApple').href = webcal;
+    $('#copyIcs').addEventListener('click', function () {
+      var done = function () { toast('Feed link copied. Paste it into your calendar’s “subscribe from URL” option.'); };
+      var fallback = function () { inp.focus(); inp.select(); toast('Link selected. Press Ctrl+C (or ⌘C) to copy it.'); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(ics).then(done, fallback); else fallback();
+    });
+  }
+
+  function setup() {
+    var team = $('#team');
+    DATA.team.forEach(function (m) {
+      team.append(h('li', null, h('span', { class: 'ini', 'aria-hidden': 'true' }, m.k), h('span', null, m.name), h('span', { class: 'role' }, m.role)));
+    });
+    var hd = $('#opt-hide-done'), hi = $('#opt-hide-info');
+    hd.checked = !!prefs.hideDone; hi.checked = !!prefs.hideInfo;
+    hd.addEventListener('change', function () { prefs.hideDone = hd.checked; savePrefs(); render(); });
+    hi.addEventListener('change', function () { prefs.hideInfo = hi.checked; savePrefs(); render(); });
+    $('#v-checklist').addEventListener('click', function () { view = 'checklist'; history.replaceState(null, '', '#checklist'); render(); });
+    $('#v-calendar').addEventListener('click', function () { view = 'calendar'; history.replaceState(null, '', '#calendar'); render(); });
+    window.addEventListener('hashchange', function () { view = location.hash === '#calendar' ? 'calendar' : 'checklist'; render(); });
+    var clr = $('#clearTicks'), armed = null;
+    clr.addEventListener('click', function () {
+      var n = Object.keys(ticks).length;
+      if (!n) { toast('You have no ticks to clear.'); return; }
+      if (!armed) { clr.textContent = 'Click again to clear ' + n + (n === 1 ? ' tick' : ' ticks'); armed = setTimeout(function () { armed = null; clr.textContent = 'Clear my ticks'; }, 4000); return; }
+      clearTimeout(armed); armed = null; clr.textContent = 'Clear my ticks';
+      ticks = {}; store.set(KEY, ticks); render(); toast('Your ticks are cleared.');
+    });
+    setupSubscribe();
+    buildHorizon();
+    render();
+    if (window.ResizeObserver) new ResizeObserver(function () { drawPlume(); }).observe($('#hzIn'));
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    if (mq.addEventListener) mq.addEventListener('change', drawPlume);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawPlume);
+    // Roll the date over if the page stays open past midnight.
+    setInterval(function () { if (localToday() !== TODAY) { render(); } }, 60000);
+  }
+  setup();
+})();
+</script>
+</body>
+</html>

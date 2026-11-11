@@ -1,0 +1,551 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//HS4.10 conveners//EGU27 convener calendar//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:EGU27 HS4.10 conveners
+X-WR-CALDESC:Convener tasks and EGU27 deadlines for session HS4.10.
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:confirm@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART;VALUE=DATE:20261110
+DTEND;VALUE=DATE:20261111
+TRANSP:TRANSPARENT
+SUMMARY:HS4.10 Confirm you accept the role (or decline quickly)
+DESCRIPTION:Assignment emails went out on 27 Oct 2026.\nAnyone who cannot 
+ convene should tell egu27@copernicus.org as soon as possible.\n\nEGU date
+ \nConvener guidelines: https://www.egu27.eu/conveners/convener-guidelines
+ .html\n\nChecklist: https://rafael3442.github.io/egu27-hs410/
+URL:https://rafael3442.github.io/egu27-hs410/
+END:VEVENT
+BEGIN:VEVENT
+UID:promote1@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART;VALUE=DATE:20261110
+DTEND;VALUE=DATE:20261201
+TRANSP:TRANSPARENT
+SUMMARY:HS4.10 Advertise the call for abstracts\, round 1
+DESCRIPTION:EGU advertises the conference\, not single sessions\, and give
+ s out no mailing lists. Promotion is up to us.\nChannels: the HEPEX commu
+ nity\, hydrology and forecasting mailing lists\, our institutes\, partner
+  projects\, LinkedIn\, Bluesky and X.\nQuote both deadlines: support appl
+ ications 1 Dec 2026\, 13:00 CET\; abstracts 12 Jan 2027\, 13:00 CET.\nSiz
+ e guide: about 15–22 abstracts fill one oral time block. Sessions with 
+ 5 or fewer abstracts are cancelled.\n\nTeam target (suggested date)\nEGU2
+ 7 home: https://www.egu27.eu/\n\nChecklist: https://rafael3442.github.io/
+ egu27-hs410/
+URL:https://rafael3442.github.io/egu27-hs410/
+END:VEVENT
+BEGIN:VEVENT
+UID:profile@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART;VALUE=DATE:20261113
+DTEND;VALUE=DATE:20261114
+TRANSP:TRANSPARENT
+SUMMARY:HS4.10 Log in\, complete your profile\, read the rules
+DESCRIPTION:Log in to the EGU27 dashboard with your Copernicus Office user
+  ID.\nCheck what is shown publicly next to your name in your personal dat
+ a options.\nComplete your profile (gender\, career stage\, country of aff
+ iliation). An automatic check uses it to award the session's EDI logo.\nR
+ ead the convener guidelines and agree to the EGU code of conduct.\n\nTeam
+  target (suggested date)\nEGU27 dashboard: https://meetingorganizer.coper
+ nicus.org/EGU27/dashboard\nPersonal data options: https://administrator.c
+ opernicus.org/personal_data/\nRules of conduct: https://www.egu27.eu/abou
+ t/egu-ga-rules-of-conduct.html\n\nChecklist: https://rafael3442.github.io
+ /egu27-hs410/
+URL:https://rafael3442.github.io/egu27-hs410/
+END:VEVENT
+BEGIN:VEVENT
+UID:meetings@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART;VALUE=DATE:20261118
+DTEND;VALUE=DATE:20261119
+TRANSP:TRANSPARENT
+SUMMARY:HS4.10 Optional: Townhall and splinter meeting requests open
+DESCRIPTION:Optional: a side meeting\, for example for the HEPEX community
+ .\nTownhall requests close 20 Jan 2027. Splinter meeting requests close 3
+ 1 Mar 2027.\n\nEGU date\nDeadlines and milestones: https://www.egu27.eu/a
+ bout/deadlines_and_milestones.html\n\nChecklist: https://rafael3442.githu
+ b.io/egu27-hs410/
+URL:https://rafael3442.github.io/egu27-hs410/
+END:VEVENT
+BEGIN:VEVENT
+UID:kickoff@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART;VALUE=DATE:20261120
+DTEND;VALUE=DATE:20261121
+TRANSP:TRANSPARENT
+SUMMARY:HS4.10 Team kick-off call: split the roles
+DESCRIPTION:Agree who leads each job: advertising\, the solicited speaker 
+ and TAN\, support-application ratings\, abstract review in January\, OSPP
+  judges\, chairing in Vienna.\nConfirm which convener is the session's OS
+ PP contact (named in the proposal).\nDecide on extras: a special issue (f
+ or example HESS\, NHESS or ADGEO)\, a splinter or townhall meeting.\nWrit
+ e the owners into this page (the owner field in index.html) so everyone s
+ ees them.\n\nTeam target (suggested date)\n\nChecklist: https://rafael344
+ 2.github.io/egu27-hs410/
+URL:https://rafael3442.github.io/egu27-hs410/
+END:VEVENT
+BEGIN:VEVENT
+UID:sessiontext@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART;VALUE=DATE:20261120
+DTEND;VALUE=DATE:20261121
+TRANSP:TRANSPARENT
+SUMMARY:HS4.10 Check the session text and convener list
+DESCRIPTION:Open the session modification tool and check the title\, descr
+ iption\, keywords and convener order.\nCheck how HS4.10 appears in the pu
+ blic programme.\n\nTeam target (suggested date)\nSession modification too
+ l: https://meetingorganizer.copernicus.org/EGU27/sessionmodification/5989
+ 6\nEGU27 programme: https://meetingorganizer.copernicus.org/EGU27/program
+ me\n\nChecklist: https://rafael3442.github.io/egu27-hs410/
+URL:https://rafael3442.github.io/egu27-hs410/
+END:VEVENT
+BEGIN:VEVENT
+UID:solicited@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART;VALUE=DATE:20261130
+DTEND;VALUE=DATE:20261201
+TRANSP:TRANSPARENT
+SUMMARY:HS4.10 Invite the solicited speaker and send the TAN
+DESCRIPTION:At most one solicited abstract per time block. Conveners canno
+ t be solicited speakers in their own session.\nGenerate the session's TAN
+  from the session overview when logged in\, and send it straight to the s
+ peaker. Extra TANs only through the programme group chair.\nThe TAN lets 
+ the speaker submit a second first-author abstract (one regular plus one s
+ olicited).\nSolicited speakers get no fee discount or travel support. Sen
+ d the TAN early.\n\nTeam target (suggested date)\nEGU27 dashboard: https:
+ //meetingorganizer.copernicus.org/EGU27/dashboard\n\nChecklist: https://r
+ afael3442.github.io/egu27-hs410/
+URL:https://rafael3442.github.io/egu27-hs410/
+END:VEVENT
+BEGIN:VEVENT
+UID:supportdl@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART:20261201T113000Z
+DTEND:20261201T120000Z
+SUMMARY:HS4.10 Deadline: Support applications close for authors (13:00 CET
+ )
+DESCRIPTION:Early-career and other eligible authors must submit their abst
+ ract and support application by this time.\nSend a last reminder to stude
+ nts and early-career contacts in the week before.\n\nEGU date\nFinancial 
+ support and waivers: https://www.egu27.eu/attendance/financial_support_an
+ d_waivers.html\n\nChecklist: https://rafael3442.github.io/egu27-hs410/
+URL:https://rafael3442.github.io/egu27-hs410/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:HS4.10: Support applications close for authors
+TRIGGER:-P1D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:rate@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART;VALUE=DATE:20261202
+DTEND;VALUE=DATE:20261212
+TRANSP:TRANSPARENT
+SUMMARY:HS4.10 Rate the support applications in HS4.10
+DESCRIPTION:The rating tool opens in Meeting Organizer. Rate the scientifi
+ c quality and importance of each applicant's contribution.\nEvery applica
+ tion must be rated\, or the applicant cannot qualify for support.\nRead t
+ he abstracts yourselves: EGU does not allow AI tools for abstract review\
+ , and abstract text must not be pasted into them.\nConveners get no autom
+ atic fee waivers.\n\nEGU date\nEGU27 dashboard: https://meetingorganizer.
+ copernicus.org/EGU27/dashboard\n\nChecklist: https://rafael3442.github.io
+ /egu27-hs410/
+URL:https://rafael3442.github.io/egu27-hs410/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:HS4.10: Rate the support applications in HS4.10
+TRIGGER:-P2D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:promote2@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART;VALUE=DATE:20261214
+DTEND;VALUE=DATE:20261215
+TRANSP:TRANSPARENT
+SUMMARY:HS4.10 Advertise round 2\, before the holidays
+DESCRIPTION:Repost the call with the abstract deadline: 12 Jan 2027\, 13:0
+ 0 CET.\nAsk colleagues and project partners to forward it.\n\nTeam target
+  (suggested date)\n\nChecklist: https://rafael3442.github.io/egu27-hs410/
+URL:https://rafael3442.github.io/egu27-hs410/
+END:VEVENT
+BEGIN:VEVENT
+UID:promote3@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART;VALUE=DATE:20270105
+DTEND;VALUE=DATE:20270106
+TRANSP:TRANSPARENT
+SUMMARY:HS4.10 Final call: one week to the abstract deadline
+DESCRIPTION:Last reminder on all channels. Abstracts close Tue 12 Jan 2027
+ \, 13:00 CET.\n\nTeam target (suggested date)\n\nChecklist: https://rafae
+ l3442.github.io/egu27-hs410/
+URL:https://rafael3442.github.io/egu27-hs410/
+END:VEVENT
+BEGIN:VEVENT
+UID:supportout@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART;VALUE=DATE:20270111
+DTEND;VALUE=DATE:20270112
+TRANSP:TRANSPARENT
+SUMMARY:HS4.10 FYI: Support selection results announced
+DESCRIPTION:Applicants and conveners learn the outcome of the support sele
+ ction.\n\nEGU date\n\nChecklist: https://rafael3442.github.io/egu27-hs410
+ /
+URL:https://rafael3442.github.io/egu27-hs410/
+END:VEVENT
+BEGIN:VEVENT
+UID:abstractdl@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART:20270112T113000Z
+DTEND:20270112T120000Z
+SUMMARY:HS4.10 Deadline: Abstract submission deadline (13:00 CET)
+DESCRIPTION:Check the abstract count straight after. Sessions with 5 or fe
+ wer abstracts are cancelled automatically\, and late abstracts do not cou
+ nt.\nOur own abstracts: a convener cannot be the presenting author of an 
+ oral in HS4.10 and should avoid co-authoring orals in it.\nFirst authors 
+ may submit one regular plus one solicited abstract.\n\nEGU date\nSession 
+ modification tool: https://meetingorganizer.copernicus.org/EGU27/sessionm
+ odification/59896\n\nChecklist: https://rafael3442.github.io/egu27-hs410/
+URL:https://rafael3442.github.io/egu27-hs410/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:HS4.10: Abstract submission deadline
+TRIGGER:-P1D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:soi@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART;VALUE=DATE:20270114
+DTEND;VALUE=DATE:20270121
+TRANSP:TRANSPARENT
+SUMMARY:HS4.10 SOI: review abstracts\, decide on mergers
+DESCRIPTION:Read every abstract in HS4.10 and those suggested for transfer
+  into it. Look closely at abstracts the system flags.\nNo AI tools for re
+ view\, and no abstract text pasted into them.\nTick ‘public interest’
+  on a few abstracts suited to general attendees.\nMergers: inform the Hyd
+ rological Sciences programme group chair first\; agree title\, descriptio
+ n and conveners\; move and accept the abstracts\; then withdraw the empti
+ ed session. Tell authors of transferred abstracts and give them time to c
+ hoose another session.\n\nEGU date\nConvener guidelines: https://www.egu2
+ 7.eu/conveners/convener-guidelines.html\n\nChecklist: https://rafael3442.
+ github.io/egu27-hs410/
+URL:https://rafael3442.github.io/egu27-hs410/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:HS4.10: SOI: review abstracts\, decide on mergers
+TRIGGER:-P2D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:soii@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART;VALUE=DATE:20270114
+DTEND;VALUE=DATE:20270122
+TRANSP:TRANSPARENT
+SUMMARY:HS4.10 SOII: tag the session for scheduling
+DESCRIPTION:Give the expected audience size so we get a suitable room.\nRe
+ quest back-to-back or no-overlap with related sessions\, for example othe
+ r HS4 forecasting sessions.\nWith no input the session is marked ‘no re
+ quests’. The programme group chair tries to meet requests but cannot gu
+ arantee them.\nLast chance to flag interest in a special issue.\n\nEGU da
+ te\n\nChecklist: https://rafael3442.github.io/egu27-hs410/
+URL:https://rafael3442.github.io/egu27-hs410/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:HS4.10: SOII: tag the session for scheduling
+TRIGGER:-P2D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:emergency@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART:20270115T113000Z
+DTEND:20270115T120000Z
+SUMMARY:HS4.10 Deadline: Emergency abstracts: last upload (13:00 CET)
+DESCRIPTION:Only conveners can upload them\, for authors who hit a technic
+ al or personal emergency before the deadline.\nEach one needs approval fr
+ om the programme group chair. The author pays a higher fee and must be an
+  EGU member.\nNever use them to reach a size threshold such as an oral bl
+ ock. Hard stop: 15 Jan 2027\, 13:00 CET.\n\nEGU date\n\nChecklist: https:
+ //rafael3442.github.io/egu27-hs410/
+URL:https://rafael3442.github.io/egu27-hs410/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:HS4.10: Emergency abstracts: last upload
+TRIGGER:-P1D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:townhall@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART;VALUE=DATE:20270120
+DTEND;VALUE=DATE:20270121
+TRANSP:TRANSPARENT
+SUMMARY:HS4.10 Optional: Townhall meeting request deadline
+DESCRIPTION:Only if we plan a townhall meeting.\n\nEGU date\n\nChecklist: 
+ https://rafael3442.github.io/egu27-hs410/
+URL:https://rafael3442.github.io/egu27-hs410/
+END:VEVENT
+BEGIN:VEVENT
+UID:scheduling@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART;VALUE=DATE:20270125
+DTEND;VALUE=DATE:20270204
+TRANSP:TRANSPARENT
+SUMMARY:HS4.10 FYI: Programme committee schedules the sessions
+DESCRIPTION:The programme group chair sets day\, time and room. No action 
+ from us.\n\nEGU date\n\nChecklist: https://rafael3442.github.io/egu27-hs4
+ 10/
+URL:https://rafael3442.github.io/egu27-hs410/
+END:VEVENT
+BEGIN:VEVENT
+UID:letters@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART;VALUE=DATE:20270204
+DTEND;VALUE=DATE:20270206
+TRANSP:TRANSPARENT
+SUMMARY:HS4.10 FYI: Acceptance letters\; our time and room arrive
+DESCRIPTION:Authors receive acceptance or rejection letters. Conveners rec
+ eive the session's time and room by email.\n\nEGU date\n\nChecklist: http
+ s://rafael3442.github.io/egu27-hs410/
+URL:https://rafael3442.github.io/egu27-hs410/
+END:VEVENT
+BEGIN:VEVENT
+UID:prepsoiii@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART;VALUE=DATE:20270208
+DTEND;VALUE=DATE:20270209
+TRANSP:TRANSPARENT
+SUMMARY:HS4.10 Team call: agree orals\, posters and chairs
+DESCRIPTION:Agree which abstracts become orals\, on-site posters and virtu
+ al posters\, and the running order.\nPick at least two chairs per time bl
+ ock\, both on site.\n\nTeam target (suggested date)\n\nChecklist: https:/
+ /rafael3442.github.io/egu27-hs410/
+URL:https://rafael3442.github.io/egu27-hs410/
+END:VEVENT
+BEGIN:VEVENT
+UID:soiii@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART;VALUE=DATE:20270209
+DTEND;VALUE=DATE:20270217
+TRANSP:TRANSPARENT
+SUMMARY:HS4.10 SOIII: build the session programme
+DESCRIPTION:Split abstracts into oral\, on-site poster and virtual poster 
+ presentations\, and set their order.\nEach regular oral gets 10 minutes\,
+  questions and changeover included. Up to 3 subtitles per time block.\nGi
+ ve the solicited talk a 10\, 20 or 30 minute slot (one per time block).\n
+ Name at least two chairpersons per time block\, both on site.\nOptional: 
+ list the solicited speaker at the end of the session description.\n\nEGU 
+ date\nSession modification tool: https://meetingorganizer.copernicus.org/
+ EGU27/sessionmodification/59896\n\nChecklist: https://rafael3442.github.i
+ o/egu27-hs410/
+URL:https://rafael3442.github.io/egu27-hs410/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:HS4.10: SOIII: build the session programme
+TRIGGER:-P2D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:programme@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART;VALUE=DATE:20270301
+DTEND;VALUE=DATE:20270302
+TRANSP:TRANSPARENT
+SUMMARY:HS4.10 Check HS4.10 in the online programme
+DESCRIPTION:Letters of schedule go to authors and the full programme goes 
+ online. Check our slot\, order and chairs.\n\nEGU date\nEGU27 programme: 
+ https://meetingorganizer.copernicus.org/EGU27/programme\n\nChecklist: htt
+ ps://rafael3442.github.io/egu27-hs410/
+URL:https://rafael3442.github.io/egu27-hs410/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:HS4.10: Check HS4.10 in the online programme
+TRIGGER:-P2D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:register@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART:20270308T103000Z
+DTEND:20270308T110000Z
+SUMMARY:HS4.10 Deadline: Register at the early rate (13:00 CEST)
+DESCRIPTION:Conveners register and pay like everyone else\; there are no a
+ utomatic waivers.\nSame deadline for visa letters of invitation and for n
+ ame badge pre-delivery.\nEGU lists this time as CEST\, but 8 March is sti
+ ll winter time. Register before 12:00 CET to be safe.\n\nEGU date\nRegist
+ ration: https://www.egu27.eu/attendance/registration.html\n\nChecklist: h
+ ttps://rafael3442.github.io/egu27-hs410/
+URL:https://rafael3442.github.io/egu27-hs410/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:HS4.10: Register at the early rate
+TRIGGER:-P1D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ospp@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART;VALUE=DATE:20270309
+DTEND;VALUE=DATE:20270419
+TRANSP:TRANSPARENT
+SUMMARY:HS4.10 Recruit OSPP judges (nominator tool)
+DESCRIPTION:Outstanding Student and PhD candidate Presentation contest: th
+ e guidelines ask for 3–5 judges per poster or PICO presentation.\nJudge
+ s need a PhD or equivalent\, must attend EGU\, cannot co-author the work 
+ they judge\, and cannot compete themselves.\nConveners and chairs may jud
+ ge.\n\nEGU date\n\nChecklist: https://rafael3442.github.io/egu27-hs410/
+URL:https://rafael3442.github.io/egu27-hs410/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:HS4.10: Recruit OSPP judges (nominator tool)
+TRIGGER:-P2D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:uploads@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART;VALUE=DATE:20270310
+DTEND;VALUE=DATE:20270311
+TRANSP:TRANSPARENT
+SUMMARY:HS4.10 FYI: Presentation upload opens for authors
+DESCRIPTION:Authors can upload presentation files and supplementary materi
+ al until 30 Apr 2027.\n\nEGU date\n\nChecklist: https://rafael3442.github
+ .io/egu27-hs410/
+URL:https://rafael3442.github.io/egu27-hs410/
+END:VEVENT
+BEGIN:VEVENT
+UID:authorsmail@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART;VALUE=DATE:20270312
+DTEND;VALUE=DATE:20270313
+TRANSP:TRANSPARENT
+SUMMARY:HS4.10 Email authors\; add public session info
+DESCRIPTION:Use the session mailing list tool (EGU matters only). Confirm 
+ every presenter will attend\; no-shows are marked ‘withdrawn after no-s
+ how’.\nShare the presenter guidelines: speak from the lectern\, use the
+  microphone\, give virtual presenters the same attention.\nAsk presenters
+  to upload files at least 24 hours before the session starts.\nAdd a shor
+ t public information text to the session for the online programme.\n\nTea
+ m target (suggested date)\nSession modification tool: https://meetingorga
+ nizer.copernicus.org/EGU27/sessionmodification/59896\n\nChecklist: https:
+ //rafael3442.github.io/egu27-hs410/
+URL:https://rafael3442.github.io/egu27-hs410/
+END:VEVENT
+BEGIN:VEVENT
+UID:lastchange@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART:20270324T113000Z
+DTEND:20270324T120000Z
+SUMMARY:HS4.10 Deadline: Last changes to the on-site daily programme (13:0
+ 0 CET)
+DESCRIPTION:Send changes to egu27@copernicus.org. After this time the on-s
+ ite daily programme is fixed.\n\nEGU date\n\nChecklist: https://rafael344
+ 2.github.io/egu27-hs410/
+URL:https://rafael3442.github.io/egu27-hs410/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:HS4.10: Last changes to the on-site daily programme
+TRIGGER:-P1D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:chairs@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART;VALUE=DATE:20270329
+DTEND;VALUE=DATE:20270330
+TRANSP:TRANSPARENT
+SUMMARY:HS4.10 Confirm chairs and the run of show
+DESCRIPTION:Per time block: one on-site chair runs the room\, a second mod
+ erates virtual presenters and the Zoom chat.\nAgree who keeps time and wh
+ o watches for no-shows.\n\nTeam target (suggested date)\n\nChecklist: htt
+ ps://rafael3442.github.io/egu27-hs410/
+URL:https://rafael3442.github.io/egu27-hs410/
+END:VEVENT
+BEGIN:VEVENT
+UID:splinter@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART;VALUE=DATE:20270331
+DTEND;VALUE=DATE:20270401
+TRANSP:TRANSPARENT
+SUMMARY:HS4.10 Optional: Splinter meeting request deadline
+DESCRIPTION:Only if we plan a splinter meeting.\n\nEGU date\n\nChecklist: 
+ https://rafael3442.github.io/egu27-hs410/
+URL:https://rafael3442.github.io/egu27-hs410/
+END:VEVENT
+BEGIN:VEVENT
+UID:ga@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART;VALUE=DATE:20270404
+DTEND;VALUE=DATE:20270410
+TRANSP:TRANSPARENT
+SUMMARY:HS4.10 EGU General Assembly\, Vienna and online
+DESCRIPTION:Austria Center Vienna. Time blocks start at 08:30\, 10:45\, 14
+ :00 and 16:15 CEST and last 105 minutes.\nBefore the session: check both 
+ chairs are present.\nKeep orals to time\, questions included. Questions c
+ ome from the room microphones and from the Zoom chat.\nPresenters stand b
+ ehind the lectern so the camera frames them.\n\nEGU date\n\nChecklist: ht
+ tps://rafael3442.github.io/egu27-hs410/
+URL:https://rafael3442.github.io/egu27-hs410/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:HS4.10: EGU General Assembly\, Vienna and online
+TRIGGER:-P2D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:judging@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART;VALUE=DATE:20270405
+DTEND;VALUE=DATE:20270419
+TRANSP:TRANSPARENT
+SUMMARY:HS4.10 OSPP judging: chase the evaluations
+DESCRIPTION:Make sure every judge submits their evaluations.\n\nEGU date\n
+ \nChecklist: https://rafael3442.github.io/egu27-hs410/
+URL:https://rafael3442.github.io/egu27-hs410/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:HS4.10: OSPP judging: chase the evaluations
+TRIGGER:-P2D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:award@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART;VALUE=DATE:20270419
+DTEND;VALUE=DATE:20270501
+TRANSP:TRANSPARENT
+SUMMARY:HS4.10 OSPP award selection (coordinator tool)
+DESCRIPTION:The coordinator tool is open 9 Mar – 30 Apr 2027.\n\nEGU dat
+ e\n\nChecklist: https://rafael3442.github.io/egu27-hs410/
+URL:https://rafael3442.github.io/egu27-hs410/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:HS4.10: OSPP award selection (coordinator tool)
+TRIGGER:-P2D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:close@egu27-hs410
+DTSTAMP:20261111T005337Z
+DTSTART;VALUE=DATE:20270530
+DTEND;VALUE=DATE:20270531
+TRANSP:TRANSPARENT
+SUMMARY:HS4.10 Deadline: Convener login closes
+DESCRIPTION:Last day for anything in Meeting Organizer. Follow up on a spe
+ cial issue if we planned one.\n\nEGU date\n\nChecklist: https://rafael344
+ 2.github.io/egu27-hs410/
+URL:https://rafael3442.github.io/egu27-hs410/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:HS4.10: Convener login closes
+TRIGGER:-P2D
+END:VALARM
+END:VEVENT
+END:VCALENDAR
